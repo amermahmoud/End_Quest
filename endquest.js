@@ -261,7 +261,7 @@ function create()
 	  this.anims.create({
 		key: 'jump',
 		frames: gameState.jumpNames,
-		frameRate: 7,
+		frameRate: 5,
 		repeat: 1
 	  });
 	  this.anims.create({
