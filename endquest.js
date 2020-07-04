@@ -121,18 +121,19 @@ function collide_with_robot(){
 		
 	})
 
-}// speed up robots
+}
 function robotGen(){
 	gameState.robotdead = false;
-	if (gameState.player.x < 6000){
+	gameState.robotspd += 15;
+	if (gameState.player.x < 4000){
 		gameState.robot1 = gameState.game.physics.add.sprite(gameState.player.x+750, 650, 'robot1','10_Run/Run_000.png').setScale(0.14);
 		gameState.robot1.flipX= true;
-		gameState.robot1.setVelocityX(-150)
+		gameState.robot1.setVelocityX(-gameState.robotspd)
 	}
 	else {
 		gameState.robot1 = gameState.game.physics.add.sprite(gameState.player.x-750, 650, 'robot1','10_Run/Run_000.png').setScale(0.14);
 		gameState.robot1.flipX= false;
-		gameState.robot1.setVelocityX(150)
+		gameState.robot1.setVelocityX(gameState.robotspd)
 	}
 	gameState.robot1.setCollideWorldBounds(true);
 	gameState.robot1.anims.play('robot1run',true)
@@ -279,8 +280,9 @@ function create()
 	gameState.throwObj = this.input.keyboard.addKey('X')
 	gameState.iskunai = false;
 	gameState.robot1.anims.play('robot1run',true)
-	gameState.robot1.setVelocityX(-150)
+	gameState.robot1.setVelocityX(-140)
 	gameState.robot1.allowGravity= false
+	gameState.robotspd = 140
 	gameState.game = this
 	gameState.shot = 0
 	gameState.playerdead =false;
@@ -356,7 +358,17 @@ function right_left_move(direction){
 	gameState.player.anims.play('run', true)}
 }
 function update(){
-	if (gameState.playerdead== false){
+	if (!gameState.robotdead){
+		if (gameState.robot1.x < 100){
+			gameState.robot1.flipX = false;
+			gameState.robot1.setVelocityX(gameState.robotspd)
+		}
+		else if (gameState.robot1.x >9150){
+			gameState.robot1.flipX = true;
+			gameState.robot1.setVelocityX(-gameState.robotspd)
+		}
+	}
+	if (!gameState.playerdead){
 		if (gameState.player.y > 700){
 			if ((gameState.cursors.up.isDown)) {
 				gameState.player.setVelocityY(-650)
@@ -402,7 +414,7 @@ function update(){
 			}
 		}
 	}
-	// restructuring/making it pretty !!!!!!!!!!!!!!!!!!!!!! Comments !!
+	
 	if (gameState.iskunai){
 		if ((((gameState.kunai.x > (gameState.robot1.x-30)&& !gameState.kunai.flipX)&&gameState.robot1.x>gameState.player.x)||(((gameState.kunai.x < (gameState.robot1.x+30)&& gameState.kunai.flipX)&&gameState.robot1.x<gameState.player.x)))&& (gameState.kunai.y> gameState.robot1.y-50)){
 			gameState.robot1.anims.pause()
