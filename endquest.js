@@ -16,6 +16,7 @@ function preload()
 	this.load.image('kunai','assests/ninjaadventurenew/png/Kunai.png',{ frameWidth: 160, frameHeight: 32})
 	this.load.multiatlas('player', 'assests/ninjaadventurenew/player.json', 'assests/ninjaadventurenew');
 	this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/robot1.json', 'assests/robots/PNG_Animations/Robot1');
+	this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/robot2.json', 'assests/robots/PNG_Animations/Robot2');
 }
 function parallax_background(game){
 	var i;
@@ -137,8 +138,30 @@ function robotGen(){
 	}
 	gameState.robot1.setCollideWorldBounds(true);
 	gameState.robot1.anims.play('robot1run',true)
-	gameState.robot1.allowGravity= false
 	collide_with_robot()
+}
+function flyrobotGen(){
+	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, 610, 'robot2','13_Death/Death_006.png').setScale(0.14);
+	gameState.flyrobot.flipX= true;
+	gameState.flyrobot.setVelocityX(-300)
+	gameState.flyrobot.setCollideWorldBounds(true);
+	gameState.flyrobot.anims.play('flyrobot',true)
+	gameState.flyrobot.body.allowGravity= false
+	gameState.game.physics.add.overlap(gameState.player,gameState.flyrobot,function(){
+		if (!gameState.cursors.down.isDown&& gameState.player.y > 610){
+			gameState.playerdead = true;
+			gameState.player.anims.pause()
+			gameState.game.time.addEvent({
+				delay: 30,
+				callback: function(){gameState.player.anims.pause()
+					gameState.player.anims.play('dead',true);
+					gameState.game.time.addEvent({
+						delay: 1000,
+						callback: function(){gameState.player.destroy()},
+						loop: false,
+				})},
+				loop: false,
+			})}})
 }
 
 function create()
@@ -151,6 +174,12 @@ function create()
 	gameState.robot1.flipX= true;
 	gameState.robot1.setCollideWorldBounds(true);
 	
+	// fly robot section
+	gameState.flyrobotNames = this.anims.generateFrameNames('robot2', {
+		start: 8, end: 9, zeroPad: 3,
+		prefix: '13_Death/Death_', suffix: '.png'
+	});
+	// robot 1 section
 	gameState.robot1runNames = this.anims.generateFrameNames('robot1', {
 		start: 0, end: 11, zeroPad: 3,
 		prefix: '10_Run/Run_', suffix: '.png'
@@ -163,7 +192,7 @@ function create()
 		start: 0, end: 11, zeroPad: 3,
 		prefix: '12_Run_Shot/Run_Shot_', suffix: '.png'
 	});
-
+	//player section
 	gameState.deadNames = this.anims.generateFrameNames('player', {
 		start: 0, end: 9, zeroPad: 3,
 		prefix: 'png/dead/Dead__', suffix: '.png'
@@ -200,6 +229,12 @@ function create()
 		start: 0, end: 9, zeroPad: 3,
 		prefix: 'png/idle/Idle__', suffix: '.png'
 	});
+
+	this.anims.create({
+		key: 'flyrobot',
+		frames: gameState.flyrobotNames,
+		frameRate: 2,
+		repeat: -1 });
 
 	this.anims.create({
 		key: 'robot1run',
@@ -292,6 +327,12 @@ function create()
 	gameState.player.anims.play('idle', true)
 	gameState.attack = false;
 	collide_with_robot()
+	gameState.game.time.addEvent({
+		delay:2000,
+		callback: flyrobotGen,
+		loop: false,
+	})
+	
 } 
 function throw_kunai(spd){
 	gameState.iskunai = true
@@ -358,6 +399,14 @@ function right_left_move(direction){
 	gameState.player.anims.play('run', true)}
 }
 function update(){
+	if (gameState.flyrobot && gameState.flyrobot.x < 150){
+		gameState.flyrobot.flipX = false;
+		gameState.flyrobot.setVelocityX(gameState.robotspd+200)
+	}
+	else if (gameState.flyrobot && gameState.flyrobot.x >9150){
+		gameState.flyrobot.flipX = true;
+		gameState.flyrobot.setVelocityX(-gameState.robotspd-200)
+	}
 	if (!gameState.robotdead){
 		if (gameState.robot1.x < 100){
 			gameState.robot1.flipX = false;
@@ -393,6 +442,9 @@ function update(){
 			else if (gameState.attkObj.isDown && gameState.unattack == false){
 				sword_attack();
 				}
+			else if (gameState.cursors.down.isDown){
+					gameState.player.anims.play('slide', true);
+				}
 			else {gameState.player.anims.play('idle',true);}
 	}
 		if (gameState.player.y < 700){
@@ -427,7 +479,6 @@ function update(){
 					loop: false,
 				});
 			}
-			gameState.robotdead =true;
 			gameState.robotdead = true;
 			gameState.kunai.destroy()
 			delete gameState.kunai;
