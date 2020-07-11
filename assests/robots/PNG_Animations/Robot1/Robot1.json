@@ -1,0 +1,1577 @@
+{
+	"textures": [
+		{
+			"image": "Robot1-0.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4029,
+				"h": 4081
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "12_Run_Shot/Run_Shot_011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 44,
+						"y": 0,
+						"w": 3918,
+						"h": 1370
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 3918,
+						"h": 1370
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 290,
+						"y": 536,
+						"w": 3246,
+						"h": 913
+					},
+					"frame": {
+						"x": 1,
+						"y": 1373,
+						"w": 3246,
+						"h": 913
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 260,
+						"y": 33,
+						"w": 1929,
+						"h": 1792
+					},
+					"frame": {
+						"x": 1,
+						"y": 2288,
+						"w": 1929,
+						"h": 1792
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_012.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 62,
+						"w": 2083,
+						"h": 1748
+					},
+					"frame": {
+						"x": 1932,
+						"y": 2288,
+						"w": 2083,
+						"h": 1748
+					}
+				},
+				{
+					"filename": "10_Run/Run_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 232,
+						"y": 221,
+						"w": 779,
+						"h": 881
+					},
+					"frame": {
+						"x": 3249,
+						"y": 1373,
+						"w": 779,
+						"h": 881
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 232,
+						"y": 221,
+						"w": 779,
+						"h": 881
+					},
+					"frame": {
+						"x": 3249,
+						"y": 1373,
+						"w": 779,
+						"h": 881
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-1.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4028,
+				"h": 3816
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "12_Run_Shot/Run_Shot_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 276,
+						"y": 479,
+						"w": 3714,
+						"h": 969
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 3714,
+						"h": 969
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 112,
+						"y": 278,
+						"w": 3643,
+						"h": 1066
+					},
+					"frame": {
+						"x": 1,
+						"y": 972,
+						"w": 3643,
+						"h": 1066
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 95,
+						"y": 66,
+						"w": 1770,
+						"h": 1775
+					},
+					"frame": {
+						"x": 1,
+						"y": 2040,
+						"w": 1770,
+						"h": 1775
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 12,
+						"y": 295,
+						"w": 1525,
+						"h": 1551
+					},
+					"frame": {
+						"x": 1773,
+						"y": 2040,
+						"w": 1525,
+						"h": 1551
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 346,
+						"y": 439,
+						"w": 727,
+						"h": 1411
+					},
+					"frame": {
+						"x": 3300,
+						"y": 2040,
+						"w": 727,
+						"h": 1411
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-2.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 3920,
+				"h": 3627
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "08_Bomb/bomb_013.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 348,
+						"w": 2365,
+						"h": 1462
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 2365,
+						"h": 1462
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_014.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 687,
+						"w": 2633,
+						"h": 1123
+					},
+					"frame": {
+						"x": 1,
+						"y": 1465,
+						"w": 2633,
+						"h": 1123
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 81,
+						"w": 1254,
+						"h": 910
+					},
+					"frame": {
+						"x": 2368,
+						"y": 1,
+						"w": 1254,
+						"h": 910
+					}
+				},
+				{
+					"filename": "13_Death/Death_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "13_Death/Death_010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "13_Death/Death_011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "13_Death/Death_012.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "13_Death/Death_013.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "13_Death/Death_014.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 9,
+						"y": 721,
+						"w": 1551,
+						"h": 354
+					},
+					"frame": {
+						"x": 2368,
+						"y": 913,
+						"w": 1551,
+						"h": 354
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_017.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 774,
+						"w": 3232,
+						"h": 1036
+					},
+					"frame": {
+						"x": 1,
+						"y": 2590,
+						"w": 3232,
+						"h": 1036
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 276,
+						"y": 125,
+						"w": 1116,
+						"h": 968
+					},
+					"frame": {
+						"x": 2636,
+						"y": 1269,
+						"w": 1116,
+						"h": 968
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 385,
+						"y": 526,
+						"w": 603,
+						"h": 1286
+					},
+					"frame": {
+						"x": 3235,
+						"y": 2239,
+						"w": 603,
+						"h": 1286
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-3.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 3951,
+				"h": 3567
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "08_Bomb/bomb_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 71,
+						"y": 323,
+						"w": 1309,
+						"h": 1535
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 1309,
+						"h": 1535
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_018.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 804,
+						"w": 3168,
+						"h": 1006
+					},
+					"frame": {
+						"x": 1,
+						"y": 1538,
+						"w": 3168,
+						"h": 1006
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 77,
+						"y": 538,
+						"w": 1762,
+						"h": 908
+					},
+					"frame": {
+						"x": 1312,
+						"y": 1,
+						"w": 1762,
+						"h": 908
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 409,
+						"y": 627,
+						"w": 860,
+						"h": 1191
+					},
+					"frame": {
+						"x": 3076,
+						"y": 1,
+						"w": 860,
+						"h": 1191
+					}
+				},
+				{
+					"filename": "13_Death/Death_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 123,
+						"y": 224,
+						"w": 1134,
+						"h": 619
+					},
+					"frame": {
+						"x": 1312,
+						"y": 911,
+						"w": 1134,
+						"h": 619
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_016.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 804,
+						"w": 3063,
+						"h": 1006
+					},
+					"frame": {
+						"x": 1,
+						"y": 2546,
+						"w": 3063,
+						"h": 1006
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 357,
+						"y": 427,
+						"w": 884,
+						"h": 1020
+					},
+					"frame": {
+						"x": 3066,
+						"y": 2546,
+						"w": 884,
+						"h": 1020
+					}
+				},
+				{
+					"filename": "10_Run/Run_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 357,
+						"y": 73,
+						"w": 726,
+						"h": 1020
+					},
+					"frame": {
+						"x": 3171,
+						"y": 1194,
+						"w": 726,
+						"h": 1020
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 357,
+						"y": 73,
+						"w": 726,
+						"h": 1020
+					},
+					"frame": {
+						"x": 3171,
+						"y": 1194,
+						"w": 726,
+						"h": 1020
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-4.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 4076,
+				"h": 4020
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "11_Run_Attack/Run_Attack_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 77,
+						"y": 60,
+						"w": 1054,
+						"h": 1032
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 1054,
+						"h": 1032
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_019.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 804,
+						"w": 3003,
+						"h": 1006
+					},
+					"frame": {
+						"x": 1,
+						"y": 1035,
+						"w": 3003,
+						"h": 1006
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_015.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 804,
+						"w": 2829,
+						"h": 1006
+					},
+					"frame": {
+						"x": 1057,
+						"y": 1,
+						"w": 2829,
+						"h": 1006
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 281,
+						"y": 587,
+						"w": 2816,
+						"h": 867
+					},
+					"frame": {
+						"x": 1,
+						"y": 2043,
+						"w": 2816,
+						"h": 867
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 413,
+						"y": 804,
+						"w": 627,
+						"h": 1006
+					},
+					"frame": {
+						"x": 2819,
+						"y": 2043,
+						"w": 627,
+						"h": 1006
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 423,
+						"y": 874,
+						"w": 1024,
+						"h": 942
+					},
+					"frame": {
+						"x": 3006,
+						"y": 1009,
+						"w": 1024,
+						"h": 942
+					}
+				},
+				{
+					"filename": "13_Death/Death_000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 329,
+						"y": 67,
+						"w": 627,
+						"h": 1005
+					},
+					"frame": {
+						"x": 3448,
+						"y": 1953,
+						"w": 627,
+						"h": 1005
+					}
+				},
+				{
+					"filename": "13_Death/Death_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 400,
+						"y": 90,
+						"w": 619,
+						"h": 978
+					},
+					"frame": {
+						"x": 3448,
+						"y": 2960,
+						"w": 619,
+						"h": 978
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 504,
+						"w": 1513,
+						"h": 841
+					},
+					"frame": {
+						"x": 1,
+						"y": 2912,
+						"w": 1513,
+						"h": 841
+					}
+				},
+				{
+					"filename": "10_Run/Run_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 77,
+						"y": 184,
+						"w": 1052,
+						"h": 908
+					},
+					"frame": {
+						"x": 1516,
+						"y": 2912,
+						"w": 1052,
+						"h": 908
+					}
+				},
+				{
+					"filename": "10_Run/Run_009.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 276,
+						"y": 125,
+						"w": 802,
+						"h": 968
+					},
+					"frame": {
+						"x": 2570,
+						"y": 3051,
+						"w": 802,
+						"h": 968
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-5.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 3586,
+				"h": 3650
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "13_Death/Death_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 155,
+						"y": 398,
+						"w": 1272,
+						"h": 669
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 1272,
+						"h": 669
+					}
+				},
+				{
+					"filename": "13_Death/Death_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 286,
+						"y": 348,
+						"w": 1038,
+						"h": 727
+					},
+					"frame": {
+						"x": 1275,
+						"y": 1,
+						"w": 1038,
+						"h": 727
+					}
+				},
+				{
+					"filename": "10_Run/Run_005.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 47,
+						"y": 151,
+						"w": 1065,
+						"h": 840
+					},
+					"frame": {
+						"x": 2315,
+						"y": 1,
+						"w": 1065,
+						"h": 840
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 290,
+						"y": 234,
+						"w": 1104,
+						"h": 861
+					},
+					"frame": {
+						"x": 1,
+						"y": 672,
+						"w": 1104,
+						"h": 861
+					}
+				},
+				{
+					"filename": "10_Run/Run_008.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 290,
+						"y": 234,
+						"w": 771,
+						"h": 861
+					},
+					"frame": {
+						"x": 1107,
+						"y": 730,
+						"w": 771,
+						"h": 861
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 281,
+						"y": 200,
+						"w": 1009,
+						"h": 900
+					},
+					"frame": {
+						"x": 1880,
+						"y": 843,
+						"w": 1009,
+						"h": 900
+					}
+				},
+				{
+					"filename": "10_Run/Run_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 343,
+						"y": 194,
+						"w": 694,
+						"h": 908
+					},
+					"frame": {
+						"x": 2891,
+						"y": 843,
+						"w": 694,
+						"h": 908
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 343,
+						"y": 194,
+						"w": 694,
+						"h": 908
+					},
+					"frame": {
+						"x": 2891,
+						"y": 843,
+						"w": 694,
+						"h": 908
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 139,
+						"y": 116,
+						"w": 1054,
+						"h": 902
+					},
+					"frame": {
+						"x": 1,
+						"y": 1535,
+						"w": 1054,
+						"h": 902
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 369,
+						"y": 845,
+						"w": 698,
+						"h": 966
+					},
+					"frame": {
+						"x": 1057,
+						"y": 1593,
+						"w": 698,
+						"h": 966
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 139,
+						"y": 470,
+						"w": 1421,
+						"h": 902
+					},
+					"frame": {
+						"x": 1757,
+						"y": 1753,
+						"w": 1421,
+						"h": 902
+					}
+				},
+				{
+					"filename": "10_Run/Run_000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 105,
+						"y": 168,
+						"w": 998,
+						"h": 934
+					},
+					"frame": {
+						"x": 1,
+						"y": 2439,
+						"w": 998,
+						"h": 934
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 105,
+						"y": 168,
+						"w": 998,
+						"h": 934
+					},
+					"frame": {
+						"x": 1,
+						"y": 2439,
+						"w": 998,
+						"h": 934
+					}
+				},
+				{
+					"filename": "13_Death/Death_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 361,
+						"y": 96,
+						"w": 729,
+						"h": 976
+					},
+					"frame": {
+						"x": 1001,
+						"y": 2561,
+						"w": 729,
+						"h": 976
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 334,
+						"y": 842,
+						"w": 760,
+						"h": 969
+					},
+					"frame": {
+						"x": 1732,
+						"y": 2657,
+						"w": 760,
+						"h": 969
+					}
+				},
+				{
+					"filename": "13_Death/Death_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 232,
+						"y": 82,
+						"w": 905,
+						"h": 992
+					},
+					"frame": {
+						"x": 2494,
+						"y": 2657,
+						"w": 905,
+						"h": 992
+					}
+				}
+			]
+		},
+		{
+			"image": "Robot1-6.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 2831,
+				"h": 3538
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "13_Death/Death_006.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 132,
+						"y": 74,
+						"w": 1171,
+						"h": 817
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 1171,
+						"h": 817
+					}
+				},
+				{
+					"filename": "10_Run/Run_011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 44,
+						"y": 128,
+						"w": 1008,
+						"h": 821
+					},
+					"frame": {
+						"x": 1174,
+						"y": 1,
+						"w": 1008,
+						"h": 821
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_011.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 44,
+						"y": 128,
+						"w": 1008,
+						"h": 821
+					},
+					"frame": {
+						"x": 1174,
+						"y": 1,
+						"w": 1008,
+						"h": 821
+					}
+				},
+				{
+					"filename": "10_Run/Run_007.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 281,
+						"y": 243,
+						"w": 833,
+						"h": 857
+					},
+					"frame": {
+						"x": 1,
+						"y": 820,
+						"w": 833,
+						"h": 857
+					}
+				},
+				{
+					"filename": "13_Death/Death_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1562,
+						"h": 1156
+					},
+					"spriteSourceSize": {
+						"x": 164,
+						"y": 150,
+						"w": 1036,
+						"h": 862
+					},
+					"frame": {
+						"x": 836,
+						"y": 824,
+						"w": 1036,
+						"h": 862
+					}
+				},
+				{
+					"filename": "10_Run/Run_010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 112,
+						"y": 117,
+						"w": 956,
+						"h": 873
+					},
+					"frame": {
+						"x": 1874,
+						"y": 824,
+						"w": 956,
+						"h": 873
+					}
+				},
+				{
+					"filename": "11_Run_Attack/Run_Attack_010.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1397,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 112,
+						"y": 117,
+						"w": 956,
+						"h": 873
+					},
+					"frame": {
+						"x": 1,
+						"y": 1688,
+						"w": 956,
+						"h": 873
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_001.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 232,
+						"y": 575,
+						"w": 918,
+						"h": 881
+					},
+					"frame": {
+						"x": 959,
+						"y": 1699,
+						"w": 918,
+						"h": 881
+					}
+				},
+				{
+					"filename": "10_Run/Run_004.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 1145,
+						"h": 1102
+					},
+					"spriteSourceSize": {
+						"x": 139,
+						"y": 116,
+						"w": 934,
+						"h": 902
+					},
+					"frame": {
+						"x": 1879,
+						"y": 1699,
+						"w": 934,
+						"h": 902
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_002.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 343,
+						"y": 548,
+						"w": 970,
+						"h": 908
+					},
+					"frame": {
+						"x": 1,
+						"y": 2582,
+						"w": 970,
+						"h": 908
+					}
+				},
+				{
+					"filename": "08_Bomb/bomb_003.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 3766,
+						"h": 1878
+					},
+					"spriteSourceSize": {
+						"x": 350,
+						"y": 860,
+						"w": 841,
+						"h": 952
+					},
+					"frame": {
+						"x": 973,
+						"y": 2582,
+						"w": 841,
+						"h": 952
+					}
+				},
+				{
+					"filename": "12_Run_Shot/Run_Shot_000.png",
+					"rotated": false,
+					"trimmed": true,
+					"sourceSize": {
+						"w": 4016,
+						"h": 1456
+					},
+					"spriteSourceSize": {
+						"x": 105,
+						"y": 522,
+						"w": 998,
+						"h": 934
+					},
+					"frame": {
+						"x": 1816,
+						"y": 2603,
+						"w": 998,
+						"h": 934
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:99c51150efa5775ba1136feb5e16655b:7eb38bcb8de694a4551df1acf43647c0:326cfe5904c26f9e3c5439f9d4cc453c$"
+	}
+}

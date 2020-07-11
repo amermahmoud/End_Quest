@@ -74,6 +74,21 @@ function parallax_background(game){
 	}
 
 }
+function playerdie(){
+	gameState.playerdead = true;
+	gameState.player.anims.pause()
+	gameState.game.time.addEvent({
+		delay: 30,
+		callback: function(){gameState.player.anims.pause()
+			gameState.player.anims.play('dead',true);
+			gameState.game.time.addEvent({
+				delay: 1000,
+				callback: function(){gameState.player.destroy()},
+				loop: false,
+		})},
+		loop: false,
+})
+}
 function collide_with_robot(){
 	gameState.game.physics.add.collider(gameState.player,gameState.robot1,function(){
 		gameState.game.time.addEvent({
@@ -81,7 +96,7 @@ function collide_with_robot(){
 			callback: function(){
 				if (!gameState.playerdead){
 					gameState.player.setVelocityX(0)
-					if (gameState.attkObj.isDown && gameState.attack == true){
+					if (gameState.attkObj.isDown && gameState.attacking == true){
 						gameState.robot1.anims.pause()
 						gameState.robot1.anims.play('robot1death',true)
 						if (gameState.robotdead == false){
@@ -103,19 +118,7 @@ function collide_with_robot(){
 						})
 					}
 					else if ((gameState.robotdead==false)&&gameState.player.y > 700){
-						gameState.playerdead = true;
-						gameState.player.anims.pause()
-						gameState.game.time.addEvent({
-							delay: 30,
-							callback: function(){gameState.player.anims.pause()
-								gameState.player.anims.play('dead',true);
-								gameState.game.time.addEvent({
-									delay: 1000,
-									callback: function(){gameState.player.destroy()},
-									loop: false,
-							})},
-							loop: false,
-					})
+						playerdie();
 			}}},
 			loop:false
 		})
@@ -140,28 +143,18 @@ function robotGen(){
 	gameState.robot1.anims.play('robot1run',true)
 	collide_with_robot()
 }
+
 function flyrobotGen(){
-	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, 610, 'robot2','13_Death/Death_006.png').setScale(0.14);
+	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, 612, 'robot2','13_Death/Death_006.png').setScale(0.14);
 	gameState.flyrobot.flipX= true;
 	gameState.flyrobot.setVelocityX(-300)
 	gameState.flyrobot.setCollideWorldBounds(true);
 	gameState.flyrobot.anims.play('flyrobot',true)
 	gameState.flyrobot.body.allowGravity= false
 	gameState.game.physics.add.overlap(gameState.player,gameState.flyrobot,function(){
-		if (!gameState.cursors.down.isDown&& gameState.player.y > 610){
-			gameState.playerdead = true;
-			gameState.player.anims.pause()
-			gameState.game.time.addEvent({
-				delay: 30,
-				callback: function(){gameState.player.anims.pause()
-					gameState.player.anims.play('dead',true);
-					gameState.game.time.addEvent({
-						delay: 1000,
-						callback: function(){gameState.player.destroy()},
-						loop: false,
-				})},
-				loop: false,
-			})}})
+		if (!gameState.cursors.down.isDown&& gameState.player.y > 615){
+			playerdie();
+		}})
 }
 
 function create()
@@ -319,13 +312,12 @@ function create()
 	gameState.robot1.allowGravity= false
 	gameState.robotspd = 140
 	gameState.game = this
-	gameState.shot = 0
 	gameState.playerdead =false;
 	gameState.robotdead = false;
-	gameState.unkunai = false;
-	gameState.unattack =false;
+	gameState.kunai_denied = false;
+	gameState.sword_denied =false;
 	gameState.player.anims.play('idle', true)
-	gameState.attack = false;
+	gameState.attacking = false;
 	collide_with_robot()
 	gameState.game.time.addEvent({
 		delay:2000,
@@ -336,11 +328,10 @@ function create()
 } 
 function throw_kunai(spd){
 	gameState.iskunai = true
-	gameState.iskunai = true
-	gameState.unkunai = true;
+	gameState.kunai_denied = true;
 	gameState.game.time.addEvent({
 		delay: 2500,
-		callback: function(){gameState.unkunai =false},
+		callback: function(){gameState.kunai_denied =false},
 		loop: false,
 	})
 	
@@ -359,18 +350,18 @@ function throw_kunai(spd){
 }
 function sword_attack(){
 	gameState.player.anims.play('attack', true);
-	gameState.attack = true;
+	gameState.attacking = true;
 	gameState.game.time.addEvent({
 		delay: 1500,
 		callback: function(){
-		gameState.attack = false;
-		gameState.unattack = true;
+		gameState.attacking = false;
+		gameState.sword_denied = true;
 	},
 		loop: false,
 	})
 	gameState.game.time.addEvent({
 		delay: 2500,
-		callback: function(){gameState.unattack =false},
+		callback: function(){gameState.sword_denied =false},
 		loop: false,
 	})
 }
@@ -387,11 +378,11 @@ function right_left_move(direction){
 		gameState.player.setVelocityY(-650)
 		gameState.player.anims.play('jump', true);
 		}
-	else if (gameState.attkObj.isDown && gameState.unattack == false){
+	else if (gameState.attkObj.isDown && gameState.sword_denied == false){
 		sword_attack();
 	}
 	else if ((gameState.throwObj.isDown)){
-		if (!gameState.iskunai  && gameState.unkunai == false){
+		if (!gameState.iskunai  && gameState.kunai_denied == false){
 			gameState.player.anims.play('throw', true);
 			throw_kunai(700);
 	}}
@@ -430,7 +421,7 @@ function update(){
 				right_left_move(true)
 			}
 			else if ((gameState.throwObj.isDown)){
-				if (!gameState.iskunai  && gameState.unkunai == false){
+				if (!gameState.iskunai  && gameState.kunai_denied == false){
 					gameState.player.anims.play('throw', true);
 					throw_kunai(500);
 				}
@@ -439,7 +430,7 @@ function update(){
 					gameState.player.anims.play('throw', true);
 				}
 			
-			else if (gameState.attkObj.isDown && gameState.unattack == false){
+			else if (gameState.attkObj.isDown && gameState.sword_denied == false){
 				sword_attack();
 				}
 			else if (gameState.cursors.down.isDown){
@@ -457,7 +448,7 @@ function update(){
 				gameState.player.x -= 5
 			}
 			if (gameState.throwObj.isDown){
-				if (!gameState.iskunai && gameState.unkunai == false){
+				if (!gameState.iskunai && gameState.kunai_denied == false){
 					gameState.player.anims.play('jumpthrow', true);
 					throw_kunai(500)
 			}}
