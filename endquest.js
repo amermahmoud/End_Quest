@@ -144,16 +144,18 @@ function robotGen(){
 	collide_with_robot()
 }
 
-function flyrobotGen(){
-	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, 612, 'robot2','13_Death/Death_006.png').setScale(0.14);
+function flyrobotGen(height){
+	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, height, 'robot2','13_Death/Death_006.png').setScale(0.14);
+	gameState.flyrobots.push(gameState.flyrobot);
 	gameState.flyrobot.flipX= true;
 	gameState.flyrobot.setVelocityX(-300)
 	gameState.flyrobot.setCollideWorldBounds(true);
 	gameState.flyrobot.anims.play('flyrobot',true)
 	gameState.flyrobot.body.allowGravity= false
 	gameState.game.physics.add.overlap(gameState.player,gameState.flyrobot,function(){
-		if (!gameState.cursors.down.isDown&& gameState.player.y > 615){
-			playerdie();
+		if (gameState.player.y > (height)){
+			if (!(height < 650 && gameState.cursors.down.isDown )){
+			playerdie();}
 		}})
 }
 
@@ -308,9 +310,9 @@ function create()
 	gameState.throwObj = this.input.keyboard.addKey('X')
 	gameState.iskunai = false;
 	gameState.robot1.anims.play('robot1run',true)
-	gameState.robot1.setVelocityX(-140)
+	gameState.robot1.setVelocityX(-160)
 	gameState.robot1.allowGravity= false
-	gameState.robotspd = 140
+	gameState.robotspd = 160
 	gameState.game = this
 	gameState.playerdead =false;
 	gameState.robotdead = false;
@@ -318,10 +320,21 @@ function create()
 	gameState.sword_denied =false;
 	gameState.player.anims.play('idle', true)
 	gameState.attacking = false;
+	gameState.flyrobots = [];
 	collide_with_robot()
 	gameState.game.time.addEvent({
 		delay:2000,
-		callback: flyrobotGen,
+		callback: function(){flyrobotGen(613)},
+		loop: false,
+	})
+	gameState.game.time.addEvent({
+		delay:5000,
+		callback: function(){flyrobotGen(670)},
+		loop: false,
+	})
+	gameState.game.time.addEvent({
+		delay:8000,
+		callback: function(){flyrobotGen(550)},
 		loop: false,
 	})
 	
@@ -390,13 +403,15 @@ function right_left_move(direction){
 	gameState.player.anims.play('run', true)}
 }
 function update(){
-	if (gameState.flyrobot && gameState.flyrobot.x < 150){
-		gameState.flyrobot.flipX = false;
-		gameState.flyrobot.setVelocityX(gameState.robotspd+200)
-	}
-	else if (gameState.flyrobot && gameState.flyrobot.x >9150){
-		gameState.flyrobot.flipX = true;
-		gameState.flyrobot.setVelocityX(-gameState.robotspd-200)
+	for (flyrobot of gameState.flyrobots){
+		if (flyrobot && flyrobot.x < 150){
+			flyrobot.flipX = false;
+			flyrobot.setVelocityX(gameState.robotspd+200)
+		}
+		else if (flyrobot && flyrobot.x >9150){
+			flyrobot.flipX = true;
+			flyrobot.setVelocityX(-gameState.robotspd-200)
+		}
 	}
 	if (!gameState.robotdead){
 		if (gameState.robot1.x < 100){
