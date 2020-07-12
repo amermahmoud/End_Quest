@@ -90,6 +90,27 @@ function playerdie(){
 		loop: false,
 })
 }
+function robotdie(){
+	gameState.robot1.anims.pause()
+	gameState.robot1.anims.play('robot1death',true)
+	if (gameState.robotdead == false){
+		gameState.game.time.addEvent({
+			delay: 2000,
+			callback: robotGen,
+			callbackScope:gameState.game,
+			loop: false,
+		});
+	}
+	gameState.robotdead =true;
+	gameState.game.time.addEvent({
+		delay: 1000,
+		callback: function(){
+			gameState.robot1.destroy()
+			gameState.robot1.x = 7000;
+		},
+		loop: false,
+	})
+}
 function collide_with_robot(){
 	gameState.game.physics.add.collider(gameState.player,gameState.robot1,function(){
 		gameState.game.time.addEvent({
@@ -98,25 +119,7 @@ function collide_with_robot(){
 				if (!gameState.playerdead){
 					gameState.player.setVelocityX(0)
 					if (gameState.attkObj.isDown && gameState.attacking == true){
-						gameState.robot1.anims.pause()
-						gameState.robot1.anims.play('robot1death',true)
-						if (gameState.robotdead == false){
-							gameState.game.time.addEvent({
-								delay: 2000,
-								callback: robotGen,
-								callbackScope:gameState.game,
-								loop: false,
-							});
-						}
-						gameState.robotdead =true;
-						gameState.game.time.addEvent({
-							delay: 1000,
-							callback: function(){
-								gameState.robot1.destroy()
-								gameState.robot1.x = 7000;
-							},
-							loop: false,
-						})
+						robotdie();
 					}
 					else if ((gameState.robotdead==false)&&gameState.player.y > 700){
 						playerdie();
@@ -127,7 +130,26 @@ function collide_with_robot(){
 	})
 
 }
-// make function for robotdie, add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
+// add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
+function missiledrop(missile){
+	gameState.game.time.addEvent({
+		delay:700,
+		callback: function(){missile.body.allowGravity = true;
+			gameState.game.time.addEvent({
+				delay:900,
+				callback:function(){missile.anims.play('explode',true)
+				gameState.game.time.addEvent({
+					delay:600,
+					callback:function(){missile.destroy();},
+					loop:false
+				})
+				},
+				loop: false
+			})
+		},
+		loop:false
+	})
+}
 function robotGen(){
 	gameState.robotdead = false;
 	gameState.robotspd += 15;
@@ -166,9 +188,7 @@ function missileGen(){
 	gameState.missile2 = gameState.game.physics.add.sprite(gameState.player.x-400, 200, 'missile','Missile_3_Flying_000.png').setScale(0.25);
 	gameState.missile3 = gameState.game.physics.add.sprite(gameState.player.x, 200, 'missile','Missile_3_Flying_000.png').setScale(0.25);
 	gameState.missiles = [];
-	gameState.missiles.push(gameState.missile1);
-	gameState.missiles.push(gameState.missile2);
-	gameState.missiles.push(gameState.missile3);
+	gameState.missiles.push(gameState.missile1,gameState.missile2,gameState.missile3);
 	for (missile of gameState.missiles){
 		missile.flipY= true;
 		missile.setCollideWorldBounds(true);
@@ -177,59 +197,10 @@ function missileGen(){
 		gameState.game.physics.add.overlap(gameState.player,missile,function(){
 				playerdie();
 			})
+		missiledrop(missile)
 }
-	gameState.game.time.addEvent({
-		delay:700,
-		callback: function(){gameState.missile1.body.allowGravity = true;
-			gameState.game.time.addEvent({
-				delay:900,
-				callback:function(){gameState.missile1.anims.play('explode',true)
-				gameState.game.time.addEvent({
-					delay:300,
-					callback:function(){gameState.missile1.destroy();},
-					loop:false
-				})
-				},
-				loop: false
-			})
-		},
-		loop:false
-})
-	gameState.game.time.addEvent({
-		delay:700,
-		callback: function(){gameState.missile2.body.allowGravity = true;
-			gameState.game.time.addEvent({
-				delay:900,
-				callback:function(){gameState.missile2.anims.play('explode',true)
-				gameState.game.time.addEvent({
-					delay:700,
-					callback:function(){gameState.missile2.destroy();},
-					loop:false
-				})
-				},
-				loop: false
-			})
-		},
-		loop:false
-	})
-	gameState.game.time.addEvent({
-		delay:700,
-		callback: function(){gameState.missile3.body.allowGravity = true;
-			gameState.game.time.addEvent({
-				delay:900,
-				callback:function(){gameState.missile3.anims.play('explode',true)
-				gameState.game.time.addEvent({
-					delay:800,
-					callback:function(){gameState.missile3.destroy();},
-					loop:false
-				})
-				},
-				loop: false
-			})
-		},
-		loop:false
-	})
-} // make the missile drop function
+	
+} 
 function create()
 {	gameState.width = 0
 	parallax_background(this)
@@ -573,26 +544,10 @@ function update(){
 	
 	if (gameState.iskunai){
 		if ((((gameState.kunai.x > (gameState.robot1.x-30)&& !gameState.kunai.flipX)&&gameState.robot1.x>gameState.player.x)||(((gameState.kunai.x < (gameState.robot1.x+30)&& gameState.kunai.flipX)&&gameState.robot1.x<gameState.player.x)))&& (gameState.kunai.y> gameState.robot1.y-50)){
-			gameState.robot1.anims.pause()
-			gameState.robot1.anims.play('robot1death',true)
-			if (gameState.robotdead == false){
-				this.time.addEvent({
-					delay: 2000,
-					callback: robotGen,
-					callbackScope:this,
-					loop: false,
-				});
-			}
-			gameState.robotdead = true;
 			gameState.kunai.destroy()
 			delete gameState.kunai;
 			gameState.iskunai = false;
-			gameState.game.time.addEvent({
-				delay: 1000,
-				callback: function(){gameState.robot1.destroy()
-				},
-				loop: false,
-			})
+			robotdie();
 		}
 		else if ((gameState.kunai.x > (gameState.player.x + 700))||(gameState.kunai.x < (gameState.player.x - 700))){
 			gameState.kunai.destroy()
