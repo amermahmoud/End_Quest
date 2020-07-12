@@ -126,6 +126,7 @@ function collide_with_robot(){
 	})
 
 }
+// make function for robotdie, bomb, add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
 function robotGen(){
 	gameState.robotdead = false;
 	gameState.robotspd += 15;
@@ -416,10 +417,12 @@ function update(){
 	if (!gameState.robotdead){
 		if (gameState.robot1.x < 100){
 			gameState.robot1.flipX = false;
+			gameState.robotspd += 15
 			gameState.robot1.setVelocityX(gameState.robotspd)
 		}
 		else if (gameState.robot1.x >9150){
 			gameState.robot1.flipX = true;
+			gameState.robotspd += 15
 			gameState.robot1.setVelocityX(-gameState.robotspd)
 		}
 	}
@@ -503,7 +506,7 @@ function update(){
 		}
 	}
 }
-// GET OBSTACLES FOR UP AND DOWN, ETC THEN FIGURE OUT HOW TO EMIT RANDOMLY WITH ROBOTS TOO
+
 const config = {
 	type: Phaser.AUTO,
 	width: 800,
