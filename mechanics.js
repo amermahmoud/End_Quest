@@ -113,26 +113,6 @@ export function collide_with_robot(gameState){
 	})
 
 }
-// add start page and instructions and game over page. then add sounds, comment it all and make it neat
-export function missiledrop(missile,gameState){
-	gameState.game.time.addEvent({
-		delay:700,
-		callback: function(){missile.body.allowGravity = true;
-			gameState.game.time.addEvent({
-				delay:900,
-				callback:function(){missile.anims.play('explode',true)
-				gameState.game.time.addEvent({
-					delay:600,
-					callback:function(){missile.destroy();},
-					loop:false
-				})
-				},
-				loop: false
-			})
-		},
-		loop:false
-	})
-}
 export function robotGen(gameState){
 	gameState.robotdead = false;
 	gameState.robotspd += 15;
@@ -180,9 +160,30 @@ export function missileGen(gameState){
 		gameState.game.physics.add.overlap(gameState.player,missile,function(){
 				playerdie(gameState);
 			})
+		gameState.game.physics.add.overlap(gameState.robot1,missile,function(){
+			robotdie(gameState)});
 		missiledrop(missile,gameState)
+}}
+// add start page and instructions and game over page. then add sounds, comment it all and make it neat
+export function missiledrop(missile,gameState){
+	gameState.game.time.addEvent({
+		delay:700,
+		callback: function(){missile.body.allowGravity = true;
+			gameState.game.time.addEvent({
+				delay:900,
+				callback:function(){missile.anims.play('explode',true)
+				gameState.game.time.addEvent({
+					delay:600,
+					callback:function(){missile.destroy();},
+					loop:false
+				})
+				},
+				loop: false
+			})
+		},
+		loop:false
+	})
 }
-} 
 export function throw_kunai(spd, gameState){
 	gameState.kunai_flying = true
 	gameState.kunai_denied = true;
