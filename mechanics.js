@@ -83,15 +83,15 @@ export function robotdie(gameState){
 			callbackScope:gameState.game,
 			loop: false,
 		});
-	}
-	gameState.robotdead =true;
-	gameState.game.time.addEvent({
+		gameState.robotdead =true;
+		gameState.game.time.addEvent({
 		delay: 1000,
 		callback: function(){
 			gameState.robot1.destroy()
 		},
 		loop: false,
 	})
+	}
 }
 export function collide_with_robot(gameState){
 	gameState.game.physics.add.collider(gameState.player,gameState.robot1,function(){
@@ -100,7 +100,7 @@ export function collide_with_robot(gameState){
 			callback: function(){
 				if (!gameState.playerdead){
 					gameState.player.setVelocityX(0)
-					if (gameState.attkObj.isDown && gameState.attacking == true && gameState.robotdead == false){
+					if (gameState.attkObj.isDown && gameState.attacking == true){
 						robotdie(gameState);
 					}
 					else if ((gameState.robotdead==false)&&gameState.player.y > 700){
