@@ -1,0 +1,356 @@
+import * as mechanics from './mechanics.js';
+const gameState = {}
+
+var game = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function game ()
+    {
+        Phaser.Scene.call(this, { key: 'game' });
+    },
+
+    preload: function ()
+    {
+        this.load.image('layer10','assests/forestart/PNG/Background layers/Layer_0010_1.png')
+        this.load.image('layer0','assests/forestart/PNG/Background layers/Layer_0000_9.png')
+        this.load.image('layer1','assests/forestart/PNG/Background layers/Layer_0001_8.png')
+        this.load.image('layer2','assests/forestart/PNG/Background layers/Layer_0002_7.png')
+        this.load.image('layer3','assests/forestart/PNG/Background layers/Layer_0003_6.png')
+        this.load.image('layer4','assests/forestart/PNG/Background layers/Layer_0004_Lights.png')
+        this.load.image('layer5','assests/forestart/PNG/Background layers/Layer_0005_5.png')
+        this.load.image('layer6','assests/forestart/PNG/Background layers/Layer_0006_4.png')
+        this.load.image('layer7','assests/forestart/PNG/Background layers/Layer_0007_Lights.png')
+        this.load.image('layer8','assests/forestart/PNG/Background layers/Layer_0008_3.png')
+        this.load.image('layer9','assests/forestart/PNG/Background layers/Layer_0009_2.png')
+        this.load.image('kunai','assests/ninjaadventurenew/png/Kunai.png',{ frameWidth: 160, frameHeight: 32})
+        this.load.multiatlas('player', 'assests/ninjaadventurenew/player.json', 'assests/ninjaadventurenew');
+        this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/robot1.json', 'assests/robots/PNG_Animations/Robot1');
+        this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/robot2.json', 'assests/robots/PNG_Animations/Robot2');
+        this.load.multiatlas('missile', 'assests/spaceshoot/PNG/Sprites/Missile/missile.json', 'assests/spaceshoot/PNG/Sprites/Missile');
+    },
+
+    create: function ()
+    {
+        gameState.width = 0
+        mechanics.parallax_background(this, gameState)
+        gameState.scoreText = this.add.text(550, 160, 'Score: 0', { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
+        var highscore = localStorage.getItem('score')
+        if (highscore == null){
+            highscore = 0;}
+        gameState.highscoreText = this.add.text(50, 160, `HighScore: ${highscore}`, { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
+        gameState.player = this.physics.add.sprite(75, 700, 'player','png/idle/Idle__001.png').setScale(0.25);
+        
+        gameState.robot1 = this.physics.add.sprite(1000, 700, 'robot1','10_Run/Run_000.png').setScale(0.14);
+
+        gameState.robot1.flipX= true;
+        gameState.robot1.setCollideWorldBounds(true);
+        
+        gameState.missileflyingNames = this.anims.generateFrameNames('missile', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'Missile_3_Flying_', suffix: '.png'
+        });
+        gameState.explodeNames = this.anims.generateFrameNames('missile', {
+            start: 0, end: 7, zeroPad: 3,
+            prefix: 'Missile_3_Explosion_', suffix: '.png'
+        });
+        // fly robot section
+        gameState.flyrobotNames = this.anims.generateFrameNames('robot2', {
+            start: 8, end: 9, zeroPad: 3,
+            prefix: '13_Death/Death_', suffix: '.png'
+        });
+        // robot 1 section
+        gameState.robot1runNames = this.anims.generateFrameNames('robot1', {
+            start: 0, end: 11, zeroPad: 3,
+            prefix: '10_Run/Run_', suffix: '.png'
+        });
+        gameState.robot1deathNames = this.anims.generateFrameNames('robot1', {
+            start: 0, end: 14, zeroPad: 3,
+            prefix: '13_Death/Death_', suffix: '.png'
+        });
+        gameState.robot1shotNames = this.anims.generateFrameNames('robot1', {
+            start: 0, end: 11, zeroPad: 3,
+            prefix: '12_Run_Shot/Run_Shot_', suffix: '.png'
+        });
+        //player section
+        gameState.deadNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/dead/Dead__', suffix: '.png'
+        });
+        gameState.runNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/run/', suffix: '.png'
+        });
+        gameState.jumpNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/jump/Jump__', suffix: '.png'
+        });
+        gameState.attackNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/attack/', suffix: '.png'
+        });
+        gameState.jumpattackNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/jumpattack/Jump_Attack__', suffix: '.png'
+        });
+        gameState.jumpthrowNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/jumpthrow/Jump_Throw__', suffix: '.png'
+        });
+        gameState.slideNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/slide/Slide__', suffix: '.png'
+        });
+        gameState.throwNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/throw/Throw__', suffix: '.png'
+        });
+        gameState.idleNames = this.anims.generateFrameNames('player', {
+            start: 0, end: 9, zeroPad: 3,
+            prefix: 'png/idle/Idle__', suffix: '.png'
+        });
+
+        this.anims.create({
+            key: 'missilefly',
+            frames: gameState.missileflyingNames,
+            frameRate: 9,
+            repeat: -1 });
+        this.anims.create({
+            key: 'explode',
+            frames: gameState.explodeNames,
+            frameRate: 7,
+            repeat: 1 });
+
+        this.anims.create({
+            key: 'flyrobot',
+            frames: gameState.flyrobotNames,
+            frameRate: 2,
+            repeat: -1 });
+
+        this.anims.create({
+            key: 'robot1run',
+            frames: gameState.robot1runNames,
+            frameRate: 11,
+            repeat: -1 });
+        this.anims.create({
+            key: 'robot1death',
+            frames: gameState.robot1deathNames,
+            frameRate: 14,
+            repeat: 0 });
+        this.anims.create({
+            key: 'robot1runshot',
+            frames: gameState.robot1shotNames,
+            frameRate: 11,
+            repeat: 0 });
+
+        this.anims.create({
+            key: 'throw',
+            frames: gameState.throwNames,
+            frameRate: 25,
+            repeat: 0 });
+        this.anims.create({
+            key: 'slide',
+            frames: gameState.slideNames,
+            frameRate: 25,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jumpthrow',
+            frames: gameState.jumpthrowNames,
+            frameRate: 20,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'jumpattack',
+            frames: gameState.jumpattackNames,
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'dead',
+            frames: gameState.deadNames,
+            frameRate: 10,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'run',
+            frames: gameState.runNames,
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'attack',
+            frames: gameState.attackNames,
+            frameRate: 20,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'jump',
+            frames: gameState.jumpNames,
+            frameRate: 5,
+            repeat: 1
+        });
+        this.anims.create({
+            key: 'idle',
+            frames: gameState.idleNames,
+            frameRate: 7,
+            repeat: -1
+        });
+        this.cameras.main.setBounds(0, 0, (gameState.width*2), gameState.layer10.height);
+        this.physics.world.setBounds(0, 0, (gameState.width), gameState.layer10.height-20);
+        gameState.player.setCollideWorldBounds(true);
+
+        this.cameras.main.startFollow(gameState.player, true, 1, 0.5,0)
+        gameState.cursors = this.input.keyboard.createCursorKeys();
+        gameState.attkObj = this.input.keyboard.addKey('Z')
+        gameState.throwObj = this.input.keyboard.addKey('X')
+        this.input.keyboard.on('keydown_SPACE', function(){this.scene.restart('game')},this) 
+        gameState.iskunai = false;
+        gameState.robot1.anims.play('robot1run',true)
+        gameState.robot1.setVelocityX(-140)
+        gameState.robot1.allowGravity= false
+        gameState.robotspd = 140
+        gameState.game = this;
+        gameState.playerdead =false;
+        gameState.robotdead = false;
+        gameState.kunai_denied = false;
+        gameState.sword_denied =false;
+        gameState.player.anims.play('idle', true)
+        gameState.attacking = false;
+        gameState.flyrobots = [];
+        gameState.score = 0;
+        mechanics.collide_with_robot(gameState)
+        gameState.game.time.addEvent({
+            delay:5000,
+            callback: function(){mechanics.flyrobotGen(625,gameState)},
+            loop: false,
+        })
+        gameState.game.time.addEvent({
+            delay:10000,
+            callback: function(){mechanics.flyrobotGen(670,gameState)},
+            loop: false,
+        })
+        gameState.game.time.addEvent({
+            delay:15000,
+            callback: function(){mechanics.flyrobotGen(550,gameState)},
+            loop: false,
+        })
+        gameState.game.time.addEvent({
+            delay:20000,
+            callback: function(){mechanics.missileGen(gameState)},
+            loop: true,
+        })
+        },
+        update: function() {
+            for (var flyrobot of gameState.flyrobots){
+                if (flyrobot && flyrobot.x < 150){
+                    flyrobot.flipX = false;
+                    flyrobot.setVelocityX(gameState.robotspd+150)
+                }
+                else if (flyrobot && flyrobot.x >9150){
+                    flyrobot.flipX = true;
+                    flyrobot.setVelocityX(-gameState.robotspd-150)
+                }
+            }
+            if (!gameState.robotdead){
+                if (gameState.robot1.x < 100){
+                    gameState.robot1.flipX = false;
+                    gameState.robotspd += 15
+                    gameState.robot1.setVelocityX(gameState.robotspd)
+                }
+                else if (gameState.robot1.x >9150){
+                    gameState.robot1.flipX = true;
+                    gameState.robotspd += 15
+                    gameState.robot1.setVelocityX(-gameState.robotspd)
+                }
+            }
+            if (!gameState.playerdead){
+                if (gameState.player.y > 700){
+                    if ((gameState.cursors.up.isDown)) {
+                        gameState.player.setVelocityY(-650)
+                        gameState.player.anims.play('jump', true);
+                        }
+                    else if (gameState.cursors.right.isDown){
+                        mechanics.right_left_move(false,gameState)
+                    }
+                    else if (gameState.cursors.left.isDown){
+                        mechanics.right_left_move(true,gameState)
+                    }
+                    else if ((gameState.throwObj.isDown)){
+                        if (!gameState.iskunai  && gameState.kunai_denied == false){
+                            gameState.player.anims.play('throw', true);
+                            mechanics.throw_kunai(500,gameState);
+                        }
+                    }
+                    else if (gameState.iskunai && (((!gameState.kunai.flipX)&& (gameState.kunai.x < (gameState.player.x +200 ))) || ((gameState.kunai.flipX)&& (gameState.kunai.x > (gameState.player.x -200 ))))){
+                            gameState.player.anims.play('throw', true);
+                        }
+                    
+                    else if (gameState.attkObj.isDown && gameState.sword_denied == false){
+                        mechanics.sword_attack(gameState);
+                        }
+                    else if (gameState.cursors.down.isDown){
+                            gameState.player.anims.play('slide', true);
+                        }
+                    else {gameState.player.anims.play('idle',true);}
+            }
+                if (gameState.player.y < 700){
+                    if (gameState.cursors.right.isDown){
+                        gameState.player.flipX =false;
+                        gameState.player.x += 5
+                    }
+                    else if (gameState.cursors.left.isDown){
+                        gameState.player.flipX =true;
+                        gameState.player.x -= 5
+                    }
+                    if (gameState.throwObj.isDown){
+                        if (!gameState.iskunai && gameState.kunai_denied == false){
+                            gameState.player.anims.play('jumpthrow', true);
+                            mechanics.throw_kunai(500,gameState)
+                    }}
+                    else {
+                        gameState.player.anims.play('jump', true);
+                    }
+                }
+            }
+            
+            if (gameState.iskunai){
+                if (Math.abs(gameState.kunai.x - gameState.robot1.x) < (30)&& (gameState.kunai.y> gameState.robot1.y-50)){
+                    gameState.kunai.destroy()
+                    delete gameState.kunai;
+                    gameState.iskunai = false;
+                    mechanics.robotdie(gameState);
+                }
+                else if ((gameState.kunai.x > (gameState.player.x + 700))||(gameState.kunai.x < (gameState.player.x - 700))){
+                    gameState.kunai.destroy()
+                    delete gameState.kunai;
+                    gameState.iskunai = false;
+                }
+            }
+        }
+
+});
+
+
+
+
+gameState.config = {
+	type: Phaser.AUTO,
+	width: 800,
+	height: 825,
+	fps: {target: 60},
+	backgroundColor: "ffffff",
+	physics: {
+		default: 'arcade',
+		arcade: {
+		  gravity: {
+			y: 800 },
+		  enableBody: true,
+	
+		}},
+  scene: [game]
+  };
+  
+  const game_start = new Phaser.Game(gameState.config);

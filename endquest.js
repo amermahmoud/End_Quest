@@ -378,6 +378,7 @@ function create()
 	gameState.cursors = this.input.keyboard.createCursorKeys();
 	gameState.attkObj = this.input.keyboard.addKey('Z')
 	gameState.throwObj = this.input.keyboard.addKey('X')
+	this.input.keyboard.on('keydown_SPACE', function(){}) ///////////ffff
 	gameState.iskunai = false;
 	gameState.robot1.anims.play('robot1run',true)
 	gameState.robot1.setVelocityX(-140)
