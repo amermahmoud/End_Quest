@@ -77,6 +77,8 @@ function parallax_background(game){
 }
 function playerdie(){
 	gameState.playerdead = true;
+	if (localStorage.getItem('score') < gameState.score){
+		localStorage.setItem('score',gameState.score)}
 	gameState.player.anims.pause()
 	gameState.game.time.addEvent({
 		delay: 30,
@@ -94,6 +96,8 @@ function robotdie(){
 	gameState.robot1.anims.pause()
 	gameState.robot1.anims.play('robot1death',true)
 	if (gameState.robotdead == false){
+		gameState.score += 100;
+		gameState.scoreText.setText(`Score: ${gameState.score}`)
 		gameState.game.time.addEvent({
 			delay: 2000,
 			callback: robotGen,
@@ -130,7 +134,7 @@ function collide_with_robot(){
 	})
 
 }
-// add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
+// add start page and instructions and game over page. then add sounds, comment it all and make it neat
 function missiledrop(missile){
 	gameState.game.time.addEvent({
 		delay:700,
@@ -204,6 +208,11 @@ function missileGen(){
 function create()
 {	gameState.width = 0
 	parallax_background(this)
+	gameState.scoreText = this.add.text(550, 160, 'Score: 0', { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
+	highscore = localStorage.getItem('score')
+	if (highscore == null){
+		highscore = 0;}
+	gameState.highscoreText = this.add.text(50, 160, `HighScore: ${highscore}`, { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
 	gameState.player = this.physics.add.sprite(75, 700, 'player','png/idle/Idle__001.png').setScale(0.25);
 	
 	gameState.robot1 = this.physics.add.sprite(1000, 700, 'robot1','10_Run/Run_000.png').setScale(0.14);
@@ -382,7 +391,7 @@ function create()
 	gameState.player.anims.play('idle', true)
 	gameState.attacking = false;
 	gameState.flyrobots = [];
-	
+	gameState.score = 0;
 	collide_with_robot()
 	gameState.game.time.addEvent({
 		delay:5000,
