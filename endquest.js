@@ -150,7 +150,7 @@ function flyrobotGen(height){
 	gameState.flyrobot = gameState.game.physics.add.sprite(gameState.player.x+750, height, 'robot2','13_Death/Death_006.png').setScale(0.14);
 	gameState.flyrobots.push(gameState.flyrobot);
 	gameState.flyrobot.flipX= true;
-	gameState.flyrobot.setVelocityX(-300)
+	gameState.flyrobot.setVelocityX(-250)
 	gameState.flyrobot.setCollideWorldBounds(true);
 	gameState.flyrobot.anims.play('flyrobot',true)
 	gameState.flyrobot.body.allowGravity= false
@@ -415,21 +415,21 @@ function create()
 	collide_with_robot()
 	gameState.game.time.addEvent({
 		delay:5000,
-		callback: function(){flyrobotGen(613)},
-		loop: false,
-	})
-	gameState.game.time.addEvent({
-		delay:7000,
-		callback: function(){flyrobotGen(670)},
-		loop: false,
-	})
-	gameState.game.time.addEvent({
-		delay:9000,
-		callback: function(){flyrobotGen(550)},
+		callback: function(){flyrobotGen(625)},
 		loop: false,
 	})
 	gameState.game.time.addEvent({
 		delay:10000,
+		callback: function(){flyrobotGen(670)},
+		loop: false,
+	})
+	gameState.game.time.addEvent({
+		delay:15000,
+		callback: function(){flyrobotGen(550)},
+		loop: false,
+	})
+	gameState.game.time.addEvent({
+		delay:20000,
 		callback: missileGen,
 		loop: true,
 	})
@@ -502,11 +502,11 @@ function update(){
 	for (flyrobot of gameState.flyrobots){
 		if (flyrobot && flyrobot.x < 150){
 			flyrobot.flipX = false;
-			flyrobot.setVelocityX(gameState.robotspd+200)
+			flyrobot.setVelocityX(gameState.robotspd+150)
 		}
 		else if (flyrobot && flyrobot.x >9150){
 			flyrobot.flipX = true;
-			flyrobot.setVelocityX(-gameState.robotspd-200)
+			flyrobot.setVelocityX(-gameState.robotspd-150)
 		}
 	}
 	if (!gameState.robotdead){
