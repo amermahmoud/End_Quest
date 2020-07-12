@@ -17,6 +17,7 @@ function preload()
 	this.load.multiatlas('player', 'assests/ninjaadventurenew/player.json', 'assests/ninjaadventurenew');
 	this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/robot1.json', 'assests/robots/PNG_Animations/Robot1');
 	this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/robot2.json', 'assests/robots/PNG_Animations/Robot2');
+	this.load.multiatlas('missile', 'assests/spaceshoot/PNG/Sprites/Missile/missile.json', 'assests/spaceshoot/PNG/Sprites/Missile');
 }
 function parallax_background(game){
 	var i;
@@ -126,7 +127,7 @@ function collide_with_robot(){
 	})
 
 }
-// make function for robotdie, bomb, add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
+// make function for robotdie, add scoring system (saving highest score to local data?), then add sounds, comment it all and make it neat
 function robotGen(){
 	gameState.robotdead = false;
 	gameState.robotspd += 15;
@@ -160,6 +161,75 @@ function flyrobotGen(height){
 		}})
 }
 
+function missileGen(){
+	gameState.missile1 = gameState.game.physics.add.sprite(gameState.player.x+400, 200, 'missile','Missile_3_Flying_000.png').setScale(0.25);
+	gameState.missile2 = gameState.game.physics.add.sprite(gameState.player.x-400, 200, 'missile','Missile_3_Flying_000.png').setScale(0.25);
+	gameState.missile3 = gameState.game.physics.add.sprite(gameState.player.x, 200, 'missile','Missile_3_Flying_000.png').setScale(0.25);
+	gameState.missiles = [];
+	gameState.missiles.push(gameState.missile1);
+	gameState.missiles.push(gameState.missile2);
+	gameState.missiles.push(gameState.missile3);
+	for (missile of gameState.missiles){
+		missile.flipY= true;
+		missile.setCollideWorldBounds(true);
+		missile.anims.play('missilefly',true)
+		missile.body.allowGravity= false
+		gameState.game.physics.add.overlap(gameState.player,missile,function(){
+				playerdie();
+			})
+}
+	gameState.game.time.addEvent({
+		delay:700,
+		callback: function(){gameState.missile1.body.allowGravity = true;
+			gameState.game.time.addEvent({
+				delay:1200,
+				callback:function(){gameState.missile1.anims.play('explode',true)
+				gameState.game.time.addEvent({
+					delay:300,
+					callback:function(){gameState.missile1.destroy();},
+					loop:false
+				})
+				},
+				loop: false
+			})
+		},
+		loop:false
+})
+	gameState.game.time.addEvent({
+		delay:700,
+		callback: function(){gameState.missile2.body.allowGravity = true;
+			gameState.game.time.addEvent({
+				delay:1200,
+				callback:function(){gameState.missile2.anims.play('explode',true)
+				gameState.game.time.addEvent({
+					delay:700,
+					callback:function(){gameState.missile2.destroy();},
+					loop:false
+				})
+				},
+				loop: false
+			})
+		},
+		loop:false
+	})
+	gameState.game.time.addEvent({
+		delay:700,
+		callback: function(){gameState.missile3.body.allowGravity = true;
+			gameState.game.time.addEvent({
+				delay:1200,
+				callback:function(){gameState.missile3.anims.play('explode',true)
+				gameState.game.time.addEvent({
+					delay:800,
+					callback:function(){gameState.missile3.destroy();},
+					loop:false
+				})
+				},
+				loop: false
+			})
+		},
+		loop:false
+	})
+} // make the missile drop function
 function create()
 {	gameState.width = 0
 	parallax_background(this)
@@ -170,6 +240,14 @@ function create()
 	gameState.robot1.flipX= true;
 	gameState.robot1.setCollideWorldBounds(true);
 	
+	gameState.missileflyingNames = this.anims.generateFrameNames('missile', {
+		start: 0, end: 9, zeroPad: 3,
+		prefix: 'Missile_3_Flying_', suffix: '.png'
+	});
+	gameState.explodeNames = this.anims.generateFrameNames('missile', {
+		start: 0, end: 7, zeroPad: 3,
+		prefix: 'Missile_3_Explosion_', suffix: '.png'
+	});
 	// fly robot section
 	gameState.flyrobotNames = this.anims.generateFrameNames('robot2', {
 		start: 8, end: 9, zeroPad: 3,
@@ -225,6 +303,17 @@ function create()
 		start: 0, end: 9, zeroPad: 3,
 		prefix: 'png/idle/Idle__', suffix: '.png'
 	});
+
+	this.anims.create({
+		key: 'missilefly',
+		frames: gameState.missileflyingNames,
+		frameRate: 9,
+		repeat: -1 });
+	this.anims.create({
+		key: 'explode',
+		frames: gameState.explodeNames,
+		frameRate: 7,
+		repeat: 1 });
 
 	this.anims.create({
 		key: 'flyrobot',
@@ -311,9 +400,9 @@ function create()
 	gameState.throwObj = this.input.keyboard.addKey('X')
 	gameState.iskunai = false;
 	gameState.robot1.anims.play('robot1run',true)
-	gameState.robot1.setVelocityX(-160)
+	gameState.robot1.setVelocityX(-140)
 	gameState.robot1.allowGravity= false
-	gameState.robotspd = 160
+	gameState.robotspd = 140
 	gameState.game = this
 	gameState.playerdead =false;
 	gameState.robotdead = false;
@@ -322,6 +411,7 @@ function create()
 	gameState.player.anims.play('idle', true)
 	gameState.attacking = false;
 	gameState.flyrobots = [];
+	
 	collide_with_robot()
 	gameState.game.time.addEvent({
 		delay:2000,
@@ -337,6 +427,11 @@ function create()
 		delay:8000,
 		callback: function(){flyrobotGen(550)},
 		loop: false,
+	})
+	gameState.game.time.addEvent({
+		delay:8000,
+		callback: missileGen,
+		loop: true,
 	})
 	
 } 
