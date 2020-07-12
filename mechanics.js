@@ -89,7 +89,6 @@ export function robotdie(gameState){
 		delay: 1000,
 		callback: function(){
 			gameState.robot1.destroy()
-			gameState.robot1.x = 7000;
 		},
 		loop: false,
 	})
@@ -101,7 +100,7 @@ export function collide_with_robot(gameState){
 			callback: function(){
 				if (!gameState.playerdead){
 					gameState.player.setVelocityX(0)
-					if (gameState.attkObj.isDown && gameState.attacking == true){
+					if (gameState.attkObj.isDown && gameState.attacking == true && gameState.robotdead == false){
 						robotdie(gameState);
 					}
 					else if ((gameState.robotdead==false)&&gameState.player.y > 700){
@@ -116,7 +115,7 @@ export function collide_with_robot(gameState){
 export function robotGen(gameState){
 	gameState.robotdead = false;
 	gameState.robotspd += 15;
-	if (gameState.player.x < 4000){
+	if (gameState.player.x <= 4000){
 		gameState.robot1 = gameState.game.physics.add.sprite(gameState.player.x+750, 650, 'robot1','10_Run/Run_000.png').setScale(0.14);
 		gameState.robot1.flipX= true;
 		gameState.robot1.setVelocityX(-gameState.robotspd)

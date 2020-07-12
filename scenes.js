@@ -1,4 +1,5 @@
 import * as mechanics from './mechanics.js';
+
 const gameState = {}
 
 var game = new Phaser.Class({
