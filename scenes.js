@@ -207,7 +207,7 @@ var game = new Phaser.Class({
         gameState.attkObj = this.input.keyboard.addKey('Z')
         gameState.throwObj = this.input.keyboard.addKey('X')
         this.input.keyboard.on('keydown_SPACE', function(){this.scene.restart('game')},this) 
-        gameState.iskunai = false;
+        gameState.kunai_flying = false;
         gameState.robot1.anims.play('robot1run',true)
         gameState.robot1.setVelocityX(-140)
         gameState.robot1.allowGravity= false
@@ -279,12 +279,12 @@ var game = new Phaser.Class({
                         mechanics.right_left_move(true,gameState)
                     }
                     else if ((gameState.throwObj.isDown)){
-                        if (!gameState.iskunai  && gameState.kunai_denied == false){
+                        if (!gameState.kunai_flying  && gameState.kunai_denied == false){
                             gameState.player.anims.play('throw', true);
                             mechanics.throw_kunai(500,gameState);
                         }
                     }
-                    else if (gameState.iskunai && (((!gameState.kunai.flipX)&& (gameState.kunai.x < (gameState.player.x +200 ))) || ((gameState.kunai.flipX)&& (gameState.kunai.x > (gameState.player.x -200 ))))){
+                    else if (gameState.kunai_flying && (((!gameState.kunai.flipX)&& (gameState.kunai.x < (gameState.player.x +200 ))) || ((gameState.kunai.flipX)&& (gameState.kunai.x > (gameState.player.x -200 ))))){
                             gameState.player.anims.play('throw', true);
                         }
                     
@@ -306,7 +306,7 @@ var game = new Phaser.Class({
                         gameState.player.x -= 5
                     }
                     if (gameState.throwObj.isDown){
-                        if (!gameState.iskunai && gameState.kunai_denied == false){
+                        if (!gameState.kunai_flying && gameState.kunai_denied == false){
                             gameState.player.anims.play('jumpthrow', true);
                             mechanics.throw_kunai(500,gameState)
                     }}
@@ -316,17 +316,17 @@ var game = new Phaser.Class({
                 }
             }
             
-            if (gameState.iskunai){
+            if (gameState.kunai_flying){
                 if (Math.abs(gameState.kunai.x - gameState.robot1.x) < (30)&& (gameState.kunai.y> gameState.robot1.y-50)){
                     gameState.kunai.destroy()
                     delete gameState.kunai;
-                    gameState.iskunai = false;
+                    gameState.kunai_flying = false;
                     mechanics.robotdie(gameState);
                 }
                 else if ((gameState.kunai.x > (gameState.player.x + 700))||(gameState.kunai.x < (gameState.player.x - 700))){
                     gameState.kunai.destroy()
                     delete gameState.kunai;
-                    gameState.iskunai = false;
+                    gameState.kunai_flying = false;
                 }
             }
         }
