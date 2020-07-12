@@ -184,7 +184,7 @@ export function missileGen(gameState){
 }
 } 
 export function throw_kunai(spd, gameState){
-	gameState.iskunai = true
+	gameState.kunai_flying = true
 	gameState.kunai_denied = true;
 	gameState.game.time.addEvent({
 		delay: 2500,
@@ -239,7 +239,7 @@ export  function right_left_move(direction, gameState){
 		sword_attack(gameState);
 	}
 	else if ((gameState.throwObj.isDown)){
-		if (!gameState.iskunai  && gameState.kunai_denied == false){
+		if (!gameState.kunai_flying  && gameState.kunai_denied == false){
 			gameState.player.anims.play('throw', true);
 			throw_kunai(700,gameState);
 	}}
