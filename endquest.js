@@ -414,7 +414,7 @@ function create()
 	
 	collide_with_robot()
 	gameState.game.time.addEvent({
-		delay:4000,
+		delay:5000,
 		callback: function(){flyrobotGen(613)},
 		loop: false,
 	})
