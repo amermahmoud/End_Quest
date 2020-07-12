@@ -182,7 +182,7 @@ function missileGen(){
 		delay:700,
 		callback: function(){gameState.missile1.body.allowGravity = true;
 			gameState.game.time.addEvent({
-				delay:1200,
+				delay:900,
 				callback:function(){gameState.missile1.anims.play('explode',true)
 				gameState.game.time.addEvent({
 					delay:300,
@@ -199,7 +199,7 @@ function missileGen(){
 		delay:700,
 		callback: function(){gameState.missile2.body.allowGravity = true;
 			gameState.game.time.addEvent({
-				delay:1200,
+				delay:900,
 				callback:function(){gameState.missile2.anims.play('explode',true)
 				gameState.game.time.addEvent({
 					delay:700,
@@ -216,7 +216,7 @@ function missileGen(){
 		delay:700,
 		callback: function(){gameState.missile3.body.allowGravity = true;
 			gameState.game.time.addEvent({
-				delay:1200,
+				delay:900,
 				callback:function(){gameState.missile3.anims.play('explode',true)
 				gameState.game.time.addEvent({
 					delay:800,
@@ -414,22 +414,22 @@ function create()
 	
 	collide_with_robot()
 	gameState.game.time.addEvent({
-		delay:2000,
+		delay:4000,
 		callback: function(){flyrobotGen(613)},
 		loop: false,
 	})
 	gameState.game.time.addEvent({
-		delay:5000,
+		delay:7000,
 		callback: function(){flyrobotGen(670)},
 		loop: false,
 	})
 	gameState.game.time.addEvent({
-		delay:8000,
+		delay:9000,
 		callback: function(){flyrobotGen(550)},
 		loop: false,
 	})
 	gameState.game.time.addEvent({
-		delay:8000,
+		delay:10000,
 		callback: missileGen,
 		loop: true,
 	})
