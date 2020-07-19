@@ -2,15 +2,15 @@ import * as mechanics from './mechanics.js';
 
 const gameState = {}
 
-var game = new Phaser.Class({
+var start = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
     initialize:
 
-    function game ()
+    function start ()
     {
-        Phaser.Scene.call(this, { key: 'game' });
+        Phaser.Scene.call(this, { key: 'start' });
     },
 
     preload: function ()
@@ -31,6 +31,52 @@ var game = new Phaser.Class({
         this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/robot1.json', 'assests/robots/PNG_Animations/Robot1');
         this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/robot2.json', 'assests/robots/PNG_Animations/Robot2');
         this.load.multiatlas('missile', 'assests/spaceshoot/PNG/Sprites/Missile/missile.json', 'assests/spaceshoot/PNG/Sprites/Missile');
+        this.load.image('start','assests/start_end/start.png')
+
+    },
+
+    create: function ()
+    {
+      this.add.image(0,0,'start').setOrigin(0,0)
+      this.input.keyboard.on('keydown_ENTER', function(){this.scene.start('instruct')},this) 
+        }
+
+});
+
+var instruct = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function instruct ()
+    {
+        Phaser.Scene.call(this, { key: 'instruct' });
+    },
+
+    preload: function ()
+    {
+        this.load.image('instruct','assests/start_end/instructions.png')
+
+    },
+
+    create: function ()
+    {
+      this.add.image(0,0,'instruct').setOrigin(0,0)
+      this.input.keyboard.on('keydown_ENTER', function(){this.scene.start('game')},this) 
+        }
+
+});
+
+var game = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function game ()
+    {
+        Phaser.Scene.call(this, { key: 'game' });
     },
 
     create: function ()
@@ -351,7 +397,7 @@ gameState.config = {
 		  enableBody: true,
 	
 		}},
-  scene: [game]
+  scene: [start,instruct,game]
   };
   
   const game_start = new Phaser.Game(gameState.config);
