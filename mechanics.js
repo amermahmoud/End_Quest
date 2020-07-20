@@ -56,8 +56,11 @@ export function parallax_background(game,gameState){
 }
 export function playerdie(gameState){
 	gameState.playerdead = true;
+	
 	if (localStorage.getItem('score') < gameState.score){
-		localStorage.setItem('score',gameState.score)}
+		localStorage.setItem('score',gameState.score)
+		gameState.game.add.text(280, 260, "New Highscore!!", { fontSize: '30px', fill: '#fff'}).setScrollFactor(0)
+	}
 	gameState.player.anims.pause()
 	gameState.game.time.addEvent({
 		delay: 30,
@@ -163,7 +166,7 @@ export function missileGen(gameState){
 			robotdie(gameState)});
 		missiledrop(missile,gameState)
 }}
-// add start page and instructions and game over page. then add sounds, comment it all and make it neat
+
 export function missiledrop(missile,gameState){
 	gameState.game.time.addEvent({
 		delay:700,

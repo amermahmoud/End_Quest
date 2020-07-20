@@ -248,12 +248,16 @@ var game = new Phaser.Class({
         this.cameras.main.setBounds(0, 0, (gameState.width*2), gameState.layer10.height);
         this.physics.world.setBounds(0, 0, (gameState.width), gameState.layer10.height-20);
         gameState.player.setCollideWorldBounds(true);
-
+        this.input.keyboard.on('keydown_ENTER', function(){
+            if (gameState.playerdead){
+                this.scene.restart('game')}},this) 
         this.cameras.main.startFollow(gameState.player, true, 1, 0.5,0)
         gameState.cursors = this.input.keyboard.createCursorKeys();
         gameState.attkObj = this.input.keyboard.addKey('Z')
         gameState.throwObj = this.input.keyboard.addKey('X')
-        this.input.keyboard.on('keydown_SPACE', function(){this.scene.restart('game')},this) 
+        this.input.keyboard.on('keydown_SPACE', function(){
+            this.scene.launch('pausescreen');
+            this.scene.pause('game')},this) 
         gameState.kunai_flying = false;
         gameState.robot1.anims.play('robot1run',true)
         gameState.robot1.setVelocityX(-140)
@@ -362,6 +366,10 @@ var game = new Phaser.Class({
                     }
                 }
             }
+            else{
+                this.add.text(300, 360, 'GAME OVER', { fontSize: '40px', fill: '#fff'}).setScrollFactor(0)
+                this.add.text(210, 460, 'Press Enter to restart', { fontSize: '30px', fill: '#fff'}).setScrollFactor(0)
+            }
             
             if (gameState.kunai_flying){
                 if (Math.abs(gameState.kunai.x - gameState.robot1.x) < (30)&& (gameState.kunai.y> gameState.robot1.y-50)){
@@ -379,9 +387,28 @@ var game = new Phaser.Class({
         }
 
 });
+var pause = new Phaser.Class({
+
+    Extends: Phaser.Scene,
+
+    initialize:
+
+    function instruct ()
+    {
+        Phaser.Scene.call(this, { key: 'pausescreen' });
+    },
 
 
+    create: function ()
+    {
+    var pausetext= this.add.text(280, 560, 'Game Paused', { fontSize: '40px', fill: '#fff'}).setScrollFactor(0)
+      this.input.keyboard.on('keydown_SPACE', function(){
+          pausetext.destroy();
+          this.scene.resume('game')
+        },this) 
+        }
 
+});
 
 gameState.config = {
 	type: Phaser.AUTO,
@@ -397,7 +424,7 @@ gameState.config = {
 		  enableBody: true,
 	
 		}},
-  scene: [start,instruct,game]
+  scene: [start,instruct,game,pause]
   };
   
   const game_start = new Phaser.Game(gameState.config);
