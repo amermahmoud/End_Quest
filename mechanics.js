@@ -78,7 +78,8 @@ export function robotdie(gameState){
 	gameState.robot1.anims.pause()
 	gameState.robot1.anims.play('robot1death',true)
 	if (gameState.robotdead == false){
-		gameState.score += 100;
+		if (!gameState.playerdead){
+			gameState.score += 100;}
 		gameState.scoreText.setText(`Score: ${gameState.score}`)
 		gameState.game.time.addEvent({
 			delay: 2000,

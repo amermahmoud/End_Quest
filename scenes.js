@@ -117,10 +117,7 @@ var game = new Phaser.Class({
             start: 0, end: 14, zeroPad: 3,
             prefix: '13_Death/Death_', suffix: '.png'
         });
-        gameState.robot1shotNames = this.anims.generateFrameNames('robot1', {
-            start: 0, end: 11, zeroPad: 3,
-            prefix: '12_Run_Shot/Run_Shot_', suffix: '.png'
-        });
+
         //player section
         gameState.deadNames = this.anims.generateFrameNames('player', {
             start: 0, end: 9, zeroPad: 3,
@@ -137,10 +134,6 @@ var game = new Phaser.Class({
         gameState.attackNames = this.anims.generateFrameNames('player', {
             start: 0, end: 9, zeroPad: 3,
             prefix: 'png/attack/', suffix: '.png'
-        });
-        gameState.jumpattackNames = this.anims.generateFrameNames('player', {
-            start: 0, end: 9, zeroPad: 3,
-            prefix: 'png/jumpattack/Jump_Attack__', suffix: '.png'
         });
         gameState.jumpthrowNames = this.anims.generateFrameNames('player', {
             start: 0, end: 9, zeroPad: 3,
@@ -186,12 +179,7 @@ var game = new Phaser.Class({
             frames: gameState.robot1deathNames,
             frameRate: 14,
             repeat: 0 });
-        this.anims.create({
-            key: 'robot1runshot',
-            frames: gameState.robot1shotNames,
-            frameRate: 11,
-            repeat: 0 });
-
+        
         this.anims.create({
             key: 'throw',
             frames: gameState.throwNames,
@@ -208,12 +196,6 @@ var game = new Phaser.Class({
             frames: gameState.jumpthrowNames,
             frameRate: 20,
             repeat: 0
-        });
-        this.anims.create({
-            key: 'jumpattack',
-            frames: gameState.jumpattackNames,
-            frameRate: 20,
-            repeat: -1
         });
         this.anims.create({
             key: 'dead',
