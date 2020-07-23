@@ -94,14 +94,11 @@ var game = new Phaser.Class({
         
         // adds the sprites for the player and the first robot
         gameState.player = this.physics.add.sprite(75, 700, 'player','png/idle/Idle__001.png').setScale(0.25);
-        gameState.player.anims.play('idle', true)
         gameState.robot1 = this.physics.add.sprite(1000, 700, 'robot1','10_Run/Run_000.png').setScale(0.14);
         gameState.robot1.flipX= true;
         gameState.robot1.setCollideWorldBounds(true);
-        gameState.robot1.anims.play('robot1run',true)
         gameState.robot1.setVelocityX(-140)
         gameState.robot1.allowGravity= false
-        mechanics.collide_with_robot(gameState) // calls the collision function to determine what happens when robot collides with player
         
         // animation frame generator for missiles and their explosions
         gameState.missileflyingNames = this.anims.generateFrameNames('missile', {
@@ -269,7 +266,12 @@ var game = new Phaser.Class({
         gameState.attacking = false;        // shows whether the player is attacking or not
         gameState.flyrobots = [];           // list of flying robots
         gameState.score = 0;                // the beginning score
-
+        
+        // plays animations for player and first robot
+        gameState.player.anims.play('idle', true)
+        gameState.robot1.anims.play('robot1run',true)
+        
+        mechanics.collide_with_robot(gameState) // calls the collision function to determine what happens when robot collides with player
         // Calls the enemy generator functions
         gameState.game.time.addEvent({
             delay:5000,
