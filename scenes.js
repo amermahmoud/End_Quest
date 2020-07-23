@@ -1,19 +1,19 @@
-import * as mechanics from './mechanics.js';
+import * as mechanics from './mechanics.js';    // imports the mechanics functions from another file
 
-const gameState = {}
+const gameState = {}    // Global variable used throughout the code and in the imported functions
 
 var start = new Phaser.Class({
-
+    // Class representing the starting scene of the game
     Extends: Phaser.Scene,
 
     initialize:
 
     function start ()
     {
-        Phaser.Scene.call(this, { key: 'start' });
+        Phaser.Scene.call(this, { key: 'start' });      // defines the key by which the scene can be called
     },
 
-    preload: function ()
+    preload: function ()    // preloads the necessary assets for the game
     {
         this.load.image('layer10','assests/forestart/PNG/Background layers/Layer_0010_1.png')
         this.load.image('layer0','assests/forestart/PNG/Background layers/Layer_0000_9.png')
@@ -44,7 +44,7 @@ var start = new Phaser.Class({
 });
 
 var instruct = new Phaser.Class({
-
+    // class representing the instructions page scene
     Extends: Phaser.Scene,
 
     initialize:
@@ -69,7 +69,7 @@ var instruct = new Phaser.Class({
 });
 
 var game = new Phaser.Class({
-
+    // Class representing the actual game
     Extends: Phaser.Scene,
 
     initialize:
@@ -81,20 +81,29 @@ var game = new Phaser.Class({
 
     create: function ()
     {
+        // defines the starting game screen width as 0 then parallax_background() adds to it
         gameState.width = 0
-        mechanics.parallax_background(this, gameState)
+        mechanics.parallax_background(this, gameState)  // adds the parallax background to the game
+
+        //adds the score text on the screen and retrieves the highscore from local storage
         gameState.scoreText = this.add.text(550, 160, 'Score: 0', { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
         var highscore = localStorage.getItem('score')
         if (highscore == null){
             highscore = 0;}
         gameState.highscoreText = this.add.text(50, 160, `HighScore: ${highscore}`, { fontSize: '30px', fill: '#000'}).setScrollFactor(0)
-        gameState.player = this.physics.add.sprite(75, 700, 'player','png/idle/Idle__001.png').setScale(0.25);
         
+        // adds the sprites for the player and the first robot
+        gameState.player = this.physics.add.sprite(75, 700, 'player','png/idle/Idle__001.png').setScale(0.25);
+        gameState.player.anims.play('idle', true)
         gameState.robot1 = this.physics.add.sprite(1000, 700, 'robot1','10_Run/Run_000.png').setScale(0.14);
-
         gameState.robot1.flipX= true;
         gameState.robot1.setCollideWorldBounds(true);
+        gameState.robot1.anims.play('robot1run',true)
+        gameState.robot1.setVelocityX(-140)
+        gameState.robot1.allowGravity= false
+        mechanics.collide_with_robot(gameState) // calls the collision function to determine what happens when robot collides with player
         
+        // animation frame generator for missiles and their explosions
         gameState.missileflyingNames = this.anims.generateFrameNames('missile', {
             start: 0, end: 9, zeroPad: 3,
             prefix: 'Missile_3_Flying_', suffix: '.png'
@@ -103,12 +112,12 @@ var game = new Phaser.Class({
             start: 0, end: 7, zeroPad: 3,
             prefix: 'Missile_3_Explosion_', suffix: '.png'
         });
-        // fly robot section
+        // animation frame generator for flying robots
         gameState.flyrobotNames = this.anims.generateFrameNames('robot2', {
             start: 8, end: 9, zeroPad: 3,
             prefix: '13_Death/Death_', suffix: '.png'
         });
-        // robot 1 section
+        // animation frame generator for the walking robots
         gameState.robot1runNames = this.anims.generateFrameNames('robot1', {
             start: 0, end: 11, zeroPad: 3,
             prefix: '10_Run/Run_', suffix: '.png'
@@ -118,7 +127,7 @@ var game = new Phaser.Class({
             prefix: '13_Death/Death_', suffix: '.png'
         });
 
-        //player section
+        // animation frame generator for the player actions
         gameState.deadNames = this.anims.generateFrameNames('player', {
             start: 0, end: 9, zeroPad: 3,
             prefix: 'png/dead/Dead__', suffix: '.png'
@@ -152,6 +161,7 @@ var game = new Phaser.Class({
             prefix: 'png/idle/Idle__', suffix: '.png'
         });
 
+        // creates the animation for the missiles and their explosions
         this.anims.create({
             key: 'missilefly',
             frames: gameState.missileflyingNames,
@@ -162,13 +172,13 @@ var game = new Phaser.Class({
             frames: gameState.explodeNames,
             frameRate: 7,
             repeat: 1 });
-
+        // creates the animation for the flying robot
         this.anims.create({
             key: 'flyrobot',
             frames: gameState.flyrobotNames,
             frameRate: 2,
             repeat: -1 });
-
+        // creates the animation for the walking robot
         this.anims.create({
             key: 'robot1run',
             frames: gameState.robot1runNames,
@@ -179,7 +189,7 @@ var game = new Phaser.Class({
             frames: gameState.robot1deathNames,
             frameRate: 14,
             repeat: 0 });
-        
+        // creates the animation for the player actions
         this.anims.create({
             key: 'throw',
             frames: gameState.throwNames,
@@ -227,34 +237,40 @@ var game = new Phaser.Class({
             frameRate: 7,
             repeat: -1
         });
+
+        // setts the camera settings to focus on the player
         this.cameras.main.setBounds(0, 0, (gameState.width*2), gameState.layer10.height);
+        this.cameras.main.startFollow(gameState.player, true, 1, 0.5,0)
+        // sets bounds for the physics of the game world
         this.physics.world.setBounds(0, 0, (gameState.width), gameState.layer10.height-20);
         gameState.player.setCollideWorldBounds(true);
+
+        // restarts the game when the player dies and presses ENTER
         this.input.keyboard.on('keydown_ENTER', function(){
             if (gameState.playerdead){
                 this.scene.restart('game')}},this) 
-        this.cameras.main.startFollow(gameState.player, true, 1, 0.5,0)
+        
+        // creates the keyboard controls used in the game
         gameState.cursors = this.input.keyboard.createCursorKeys();
         gameState.attkObj = this.input.keyboard.addKey('Z')
         gameState.throwObj = this.input.keyboard.addKey('X')
         this.input.keyboard.on('keydown_SPACE', function(){
             this.scene.launch('pausescreen');
             this.scene.pause('game')},this) 
-        gameState.kunai_flying = false;
-        gameState.robot1.anims.play('robot1run',true)
-        gameState.robot1.setVelocityX(-140)
-        gameState.robot1.allowGravity= false
-        gameState.robotspd = 140
-        gameState.game = this;
-        gameState.playerdead =false;
-        gameState.robotdead = false;
-        gameState.kunai_denied = false;
-        gameState.sword_denied =false;
-        gameState.player.anims.play('idle', true)
-        gameState.attacking = false;
-        gameState.flyrobots = [];
-        gameState.score = 0;
-        mechanics.collide_with_robot(gameState)
+        
+        // sets global variables used in the game
+        gameState.kunai_flying = false;     // indicates whether there is a kunai flying or not
+        gameState.robotspd = 140    // the starting speed for the robots
+        gameState.game = this;      // globally set to be referred to in other functions
+        gameState.playerdead =false;    // indicates if player is dead or not
+        gameState.robotdead = false;    // indicates if robot is dead or not
+        gameState.kunai_denied = false;     // indicates if kunai is available to be used
+        gameState.sword_denied =false;      // indicates if sword is available to be used
+        gameState.attacking = false;        // shows whether the player is attacking or not
+        gameState.flyrobots = [];           // list of flying robots
+        gameState.score = 0;                // the beginning score
+
+        // Calls the enemy generator functions
         gameState.game.time.addEvent({
             delay:5000,
             callback: function(){mechanics.flyrobotGen(625,gameState)},
