@@ -51,12 +51,12 @@ var instruct = new Phaser.Class({
 
     function instruct ()
     {
-        Phaser.Scene.call(this, { key: 'instruct' });
+        Phaser.Scene.call(this, { key: 'instruct' }); // defines the key by which the scene can be called
     },
 
     preload: function ()
     {
-        this.load.image('instruct','assests/start_end/instructions.png')
+        this.load.image('instruct','assests/start_end/instructions.png')    // preload instructions
 
     },
 
@@ -294,7 +294,11 @@ var game = new Phaser.Class({
             loop: true,
         })
         },
+
         update: function() {
+            // Executed in every frame
+
+            // makes robots change direction when they reach the end of the map
             for (var flyrobot of gameState.flyrobots){
                 if (flyrobot && flyrobot.x < 150){
                     flyrobot.flipX = false;
@@ -317,36 +321,45 @@ var game = new Phaser.Class({
                     gameState.robot1.setVelocityX(-gameState.robotspd)
                 }
             }
+
+            // checks for player controls while the player is alive
             if (!gameState.playerdead){
-                if (gameState.player.y > 700){
+
+                // controls if the player is on the ground
+                if (gameState.player.y > 700){         
                     if ((gameState.cursors.up.isDown)) {
                         gameState.player.setVelocityY(-650)
-                        gameState.player.anims.play('jump', true);
+                        gameState.player.anims.play('jump', true);  // jumps on pressing up arrow
                         }
                     else if (gameState.cursors.right.isDown){
-                        mechanics.right_left_move(false,gameState)
+                        mechanics.right_left_move(false,gameState)  // runs to right direction
                     }
                     else if (gameState.cursors.left.isDown){
-                        mechanics.right_left_move(true,gameState)
+                        mechanics.right_left_move(true,gameState)   // runs to left direction
                     }
-                    else if ((gameState.throwObj.isDown)){
+                    else if ((gameState.throwObj.isDown)){      
+                        // throw kunai when the key is pressed and it's avaialble
                         if (!gameState.kunai_flying  && gameState.kunai_denied == false){
                             gameState.player.anims.play('throw', true);
                             mechanics.throw_kunai(500,gameState);
                         }
                     }
                     else if (gameState.kunai_flying && (((!gameState.kunai.flipX)&& (gameState.kunai.x < (gameState.player.x +200 ))) || ((gameState.kunai.flipX)&& (gameState.kunai.x > (gameState.player.x -200 ))))){
+                            // keeps the throwing animation for the player playing for a bit after throwing
                             gameState.player.anims.play('throw', true);
                         }
-                    
                     else if (gameState.attkObj.isDown && gameState.sword_denied == false){
+                        // attacks with sword when key is pressed and it's available (sword_denied == false)
                         mechanics.sword_attack(gameState);
                         }
                     else if (gameState.cursors.down.isDown){
                             gameState.player.anims.play('slide', true);
                         }
-                    else {gameState.player.anims.play('idle',true);}
+                    // if nothing else is going on for the player, idle animation plays
+                    else {gameState.player.anims.play('idle',true);}      
             }
+
+                // sets controls when the player is in the air
                 if (gameState.player.y < 700){
                     if (gameState.cursors.right.isDown){
                         gameState.player.flipX =false;
@@ -358,7 +371,7 @@ var game = new Phaser.Class({
                     }
                     if (gameState.throwObj.isDown){
                         if (!gameState.kunai_flying && gameState.kunai_denied == false){
-                            gameState.player.anims.play('jumpthrow', true);
+                            gameState.player.anims.play('jumpthrow', true);        // throws while jumping
                             mechanics.throw_kunai(500,gameState)
                     }}
                     else {
@@ -366,18 +379,24 @@ var game = new Phaser.Class({
                     }
                 }
             }
+            // if player is dead
             else{
+                // adds game over text on the screen
                 this.add.text(300, 360, 'GAME OVER', { fontSize: '40px', fill: '#fff'}).setScrollFactor(0)
                 this.add.text(210, 460, 'Press Enter to restart', { fontSize: '30px', fill: '#fff'}).setScrollFactor(0)
             }
             
+
+            // checks to remove kunai when it hits a robot or when it goes far away from the player
             if (gameState.kunai_flying){
+                // if kunai comes near enough to hit a robot from one of the two directions (this is more accurate than adding a collide function)
                 if (Math.abs(gameState.kunai.x - gameState.robot1.x) < (30)&& (gameState.kunai.y> gameState.robot1.y-50)){
                     gameState.kunai.destroy()
                     delete gameState.kunai;
                     gameState.kunai_flying = false;
                     mechanics.robotdie(gameState);
                 }
+                // if it goes far away from the player in any direction
                 else if ((gameState.kunai.x > (gameState.player.x + 700))||(gameState.kunai.x < (gameState.player.x - 700))){
                     gameState.kunai.destroy()
                     delete gameState.kunai;
@@ -387,21 +406,23 @@ var game = new Phaser.Class({
         }
 
 });
-var pause = new Phaser.Class({
 
+var pause = new Phaser.Class({
+    // class representing pause screen, allows to resume the game
     Extends: Phaser.Scene,
 
     initialize:
 
     function instruct ()
     {
-        Phaser.Scene.call(this, { key: 'pausescreen' });
+        Phaser.Scene.call(this, { key: 'pausescreen' });    // key to call the scene from the game
     },
 
 
     create: function ()
     {
     var pausetext= this.add.text(280, 560, 'Game Paused', { fontSize: '40px', fill: '#fff'}).setScrollFactor(0)
+    // removes the game paused text and resumes game when space is pressed
       this.input.keyboard.on('keydown_SPACE', function(){
           pausetext.destroy();
           this.scene.resume('game')
@@ -410,6 +431,7 @@ var pause = new Phaser.Class({
 
 });
 
+// variable defining the settings of the game
 gameState.config = {
 	type: Phaser.AUTO,
 	width: 800,
@@ -426,5 +448,5 @@ gameState.config = {
 		}},
   scene: [start,instruct,game,pause]
   };
-  
+  // calls the phaser game with the configs specified
   const game_start = new Phaser.Game(gameState.config);
