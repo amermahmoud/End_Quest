@@ -28,8 +28,8 @@ var start = new Phaser.Class({
         this.load.image('layer9','assests/forestart/PNG/Background layers/Layer_0009_2.png')
         this.load.image('kunai','assests/ninjaadventurenew/png/Kunai.png',{ frameWidth: 160, frameHeight: 32})
         this.load.multiatlas('player', 'assests/ninjaadventurenew/player.json', 'assests/ninjaadventurenew');
-        this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/robot1.json', 'assests/robots/PNG_Animations/Robot1');
-        this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/robot2.json', 'assests/robots/PNG_Animations/Robot2');
+        this.load.multiatlas('robot1', 'assests/robots/PNG_Animations/Robot1/Robot1.json', 'assests/robots/PNG_Animations/Robot1');
+        this.load.multiatlas('robot2', 'assests/robots/PNG_Animations/Robot2/Robot2.json', 'assests/robots/PNG_Animations/Robot2');
         this.load.multiatlas('missile', 'assests/spaceshoot/PNG/Sprites/Missile/missile.json', 'assests/spaceshoot/PNG/Sprites/Missile');
         this.load.image('start','assests/start_end/start.png')
 
