@@ -37,8 +37,10 @@ var start = new Phaser.Class({
 
     create: function ()
     {
-      this.add.image(0,0,'start').setOrigin(0,0)
-      this.input.keyboard.on('keydown_ENTER', function(){this.scene.start('instruct')},this) 
+        var myobj = document.getElementById("hourglass");
+        myobj.remove();     // removes loading spinner on load
+        this.add.image(0,0,'start').setOrigin(0,0)
+        this.input.keyboard.on('keydown_ENTER', function(){this.scene.start('instruct')},this) 
         }
 
 });
