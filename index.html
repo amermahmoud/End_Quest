@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <div id="hourglass" class="lds-hourglass"><div>Loading Game</div></div>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.12/dist/phaser.min.js"></script>
     <script type="module" src="scenes.js"></script>
     <style type="text/css">
@@ -14,7 +13,7 @@
         }
         .lds-hourglass {
         display: inline-block;
-        position: relative;
+        position: absolute;
         width: 100px;
         height: 100px;
         }
@@ -47,5 +46,6 @@
     </style>
 </head>
 <body>
+    <div id="hourglass" class="lds-hourglass"><p>Loading Game</p></div>
 </body>
 </html>
